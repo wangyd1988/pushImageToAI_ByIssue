@@ -18,6 +18,9 @@ jobs:
     # if: contains(github.event.issue.labels.*.name, 'origin-image')
     # 镜像转换任务的步骤列表
     steps:
+    
+      - name: Remove unwanted stuff
+        uses: gbraad-actions/remove-unwanted@v1
       # 00. 释放空间
       - name: free disk
         run: 
