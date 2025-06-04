@@ -29,7 +29,12 @@ jobs:
 
       # 00. 释放空间
       - name: free disk
-        run: rm -rf /opt/hostedtoolcache
+        run: 
+          sudo rm -rf /opt/hostedtoolcache
+          sudo rm -rf /usr/share/dotnet
+          sudo rm -rf /opt/ghc
+          sudo rm -rf "/usr/local/share/boost"
+          sudo rm -rf "$AGENT_TOOLSDIRECTORY"
       
       # 3. 运行 go 代码
       - name: Run code
