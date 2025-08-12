@@ -18,6 +18,18 @@ jobs:
     # if: contains(github.event.issue.labels.*.name, 'origin-image')
     # 镜像转换任务的步骤列表
     steps:
+    
+      - name: Remove unwanted stuff
+        uses: gbraad-actions/remove-unwanted@v1
+      # 00. 释放空间
+      - name: free disk
+        run: 
+          sudo rm -rf /opt/hostedtoolcache
+          sudo rm -rf /usr/share/dotnet
+          sudo rm -rf /opt/ghc
+          sudo rm -rf "/usr/local/share/boost"
+          sudo rm -rf "$AGENT_TOOLSDIRECTORY"
+     
       # 1. 切换分支（默认主分支）
       - name: Check out code
         uses: actions/checkout@v2
@@ -25,7 +37,7 @@ jobs:
       - name: Setup go
         uses: actions/setup-go@v4
         with:
-          go-version: '1.20'
+          go-version: '1.20' 
       
       # 3. 运行 go 代码
       - name: Run code
